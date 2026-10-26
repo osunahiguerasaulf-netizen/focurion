@@ -1,0 +1,32 @@
+FOCURION MYSQL 2.1 — ENTREGA FINAL
+
+WINDOWS
+1. Inicia MySQL desde XAMPP.
+2. Ejecuta iniciar-focurion.bat.
+3. Abre http://localhost:3000
+
+MACOS
+1. Inicia MySQL Database desde XAMPP.
+2. Ejecuta iniciar-focurion.command.
+3. Abre http://localhost:3000
+
+Focurion prueba automáticamente los puertos MySQL 3306 y 3307.
+Consulta README.md si tu instalación usa otro puerto o contraseña.
+
+CUENTAS DE PRUEBA
+Alumno: alumno@focurion.local / Demo123!
+Admin: admin@focurion.local / Admin123!
+
+ESTA ENTREGA INCLUYE
+- Panel de alumno y administrador con modo claro y oscuro.
+- Sidebar dinámico o manual y búsqueda global.
+- Calendario editable, tareas y Pomodoro personalizable.
+- Salas colaborativas y comunidades con publicaciones, recursos,
+  proyectos, retos, miembros y chat en vivo.
+- Contenido inicial automático para cuentas y comunidades existentes.
+- Recuperación de contraseña.
+- Respaldo JSON descargable desde la configuración administrativa.
+- Fechas demo actualizadas automáticamente sin cambiar datos creados por el usuario.
+
+En modo local, el código de recuperación aparece en pantalla y en la terminal.
+Para enviarlo por correo completa las variables SMTP_* del archivo .env.

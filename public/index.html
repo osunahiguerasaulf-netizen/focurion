@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focurion - Enfócate, aprende y colabora</title>
+  <meta name="description" content="Plataforma académica local para organizar tareas, estudiar con Pomodoro y colaborar.">
+  <link rel="icon" href="/assets/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="auth-body">
+  <main class="auth-shell">
+    <section class="auth-brand-panel">
+      <div class="ambient ambient-a"></div>
+      <div class="ambient ambient-b"></div>
+      <div class="brand-lockup">
+        <img src="/assets/logo.png" alt="Logo de Focurion" class="brand-logo-xl">
+        <div>
+          <span class="eyebrow">FOCURION</span>
+          <h1>Convierte tus metas académicas en progreso real.</h1>
+          <p>Organiza tareas, estudia con enfoque, colabora con otros estudiantes y registra cada avance en una sola plataforma.</p>
+        </div>
+      </div>
+      <div class="auth-feature-grid">
+        <article><span data-icon="clock"></span><strong>Pomodoro bloqueante</strong><small>Sesiones sin distracciones.</small></article>
+        <article><span data-icon="users"></span><strong>Comunidad estudiantil</strong><small>Publicaciones, salas y comentarios.</small></article>
+        <article><span data-icon="bot"></span><strong>IA académica local</strong><small>Apoyo sin depender de servicios externos.</small></article>
+        <article><span data-icon="trending"></span><strong>Progreso visible</strong><small>XP, rachas, metas y ranking.</small></article>
+      </div>
+    </section>
+
+    <section class="auth-card-wrap">
+      <div class="auth-card glass-card">
+        <div class="auth-card-logo"><img src="/assets/logo.png" alt=""><span>Focurion</span></div>
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" data-auth-tab="login" type="button">Iniciar sesión</button>
+          <button class="auth-tab" data-auth-tab="register" type="button">Crear cuenta</button>
+        </div>
+
+        <form id="loginForm" class="auth-form active" autocomplete="on">
+          <div class="form-heading">
+            <h2>Bienvenido de nuevo</h2>
+            <p>Continúa desarrollando tus habilidades.</p>
+          </div>
+          <label>Correo electrónico
+            <input name="email" type="email" placeholder="tu@correo.com" required value="alumno@focurion.local">
+          </label>
+          <label>Contraseña
+            <div class="password-field"><input name="password" type="password" placeholder="••••••••" required value="Demo123!"><button type="button" class="toggle-password" aria-label="Mostrar contraseña" data-icon="eye"></button></div>
+          </label>
+          <button class="forgot-link" id="forgotPasswordLink" type="button">¿Olvidaste tu contraseña?</button>
+          <button class="btn btn-primary btn-block" type="submit">Entrar a Focurion</button>
+          <div class="demo-box">
+            <strong>Cuenta de demostración</strong>
+            <span>alumno@focurion.local · Demo123!</span>
+            <span>admin@focurion.local · Admin123!</span>
+          </div>
+        </form>
+
+        <form id="registerForm" class="auth-form" autocomplete="on">
+          <div class="form-heading">
+            <h2>Crea tu espacio de estudio</h2>
+            <p>Tu progreso comienza con una cuenta.</p>
+          </div>
+          <div class="form-grid-2">
+            <label>Nombre completo<input name="name" type="text" placeholder="Tu nombre" required minlength="2"></label>
+            <label>Universidad<input name="university" type="text" placeholder="UPSIN" value="UPSIN"></label>
+          </div>
+          <label>Carrera<input name="career" type="text" placeholder="Ingeniería en Tecnologías de la Información"></label>
+          <label>Correo electrónico<input name="email" type="email" placeholder="tu@correo.com" required></label>
+          <label>Contraseña<div class="password-field"><input name="password" type="password" placeholder="Mínimo 8 caracteres" required minlength="8"><button type="button" class="toggle-password" aria-label="Mostrar contraseña" data-icon="eye"></button></div></label>
+          <button class="btn btn-primary btn-block" type="submit">Crear mi cuenta</button>
+        </form>
+
+        <form id="forgotForm" class="auth-form" autocomplete="on">
+          <button class="auth-back" id="backToLogin" type="button"><span data-icon="arrowLeft"></span> Volver al inicio</button>
+          <div class="recovery-icon" data-icon="mail"></div>
+          <div class="form-heading recovery-heading"><h2>Recupera tu contraseña</h2><p>Te enviaremos un código de 6 dígitos con vigencia de 15 minutos.</p></div>
+          <label>Correo electrónico<input name="email" type="email" placeholder="tu@correo.com" required></label>
+          <button class="btn btn-primary btn-block" type="submit">Enviar código</button>
+        </form>
+
+        <form id="resetForm" class="auth-form" autocomplete="off">
+          <button class="auth-back" id="backFromReset" type="button"><span data-icon="arrowLeft"></span> Cambiar correo</button>
+          <div class="recovery-icon" data-icon="key"></div>
+          <div class="form-heading recovery-heading"><h2>Crea una nueva contraseña</h2><p id="resetEmailHint">Escribe el código que recibiste.</p></div>
+          <input name="email" type="hidden">
+          <label>Código de recuperación<input class="code-input" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="000000" required></label>
+          <label>Nueva contraseña<div class="password-field"><input name="newPassword" type="password" minlength="8" placeholder="Mínimo 8 caracteres" required><button type="button" class="toggle-password" aria-label="Mostrar contraseña" data-icon="eye"></button></div></label>
+          <label>Confirmar contraseña<div class="password-field"><input name="confirmPassword" type="password" minlength="8" placeholder="Repite tu contraseña" required><button type="button" class="toggle-password" aria-label="Mostrar contraseña" data-icon="eye"></button></div></label>
+          <div id="developmentCode" class="dev-code hidden"></div>
+          <button class="btn btn-primary btn-block" type="submit">Guardar nueva contraseña</button>
+        </form>
+        <div id="authMessage" class="form-message" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+  <script src="/js/icons.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focurion</title>
+  <link rel="icon" href="/assets/logo.png">
+  <link rel="stylesheet" href="/css/styles.css?v=20260805-community-reactions">
+</head>
+<body class="app-body">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <button class="sidebar-toggle" id="sidebarToggle" type="button" title="Contraer barra lateral" aria-label="Contraer barra lateral" aria-expanded="true"></button>
+      <a class="sidebar-brand" href="#dashboard" data-view-link="dashboard">
+        <img src="/assets/logo.png" alt="Logo de Focurion"><span>Focurion</span>
+      </a>
+      <nav class="sidebar-nav" aria-label="Navegación principal">
+        <button class="nav-item active student-nav" data-view="dashboard"><span data-icon="home"></span><b>Panel principal</b></button>
+        <button class="nav-item student-nav" data-view="personal"><span data-icon="bolt"></span><b>Centro personal</b></button>
+        <button class="nav-item student-nav" data-view="rooms"><span data-icon="users"></span><b>Salas colaborativas</b></button>
+        <button class="nav-item student-nav" data-view="ai"><span data-icon="bot"></span><b>IA Académica</b></button>
+        <button class="nav-item student-nav" data-view="communities"><span data-icon="network"></span><b>Comunidades</b></button>
+        <button class="nav-item student-nav" data-view="ranking"><span data-icon="trophy"></span><b>Ranking</b></button>
+        <button class="nav-item student-nav" data-view="calendar"><span data-icon="calendar"></span><b>Calendario</b></button>
+        <button class="nav-item student-nav" data-view="settings"><span data-icon="settings"></span><b>Configuración</b></button>
+        <div class="admin-nav-label admin-only hidden">Administración</div>
+        <div class="admin-side-nav admin-only hidden" aria-label="Navegación administrativa">
+          <button class="nav-item admin-side-item active" data-admin-side-tab="dashboard" title="Panel"><span data-icon="home"></span><b>Panel</b></button>
+          <button class="nav-item admin-side-item" data-admin-side-tab="users" title="Usuarios"><span data-icon="users"></span><b>Usuarios</b></button>
+          <button class="nav-item admin-side-item" data-admin-side-tab="communities" title="Comunidades"><span data-icon="network"></span><b>Comunidades</b></button>
+          <button class="nav-item admin-side-item" data-admin-side-tab="rooms" title="Salas"><span data-icon="message"></span><b>Salas</b></button>
+          <button class="nav-item admin-side-item" data-admin-side-tab="events" title="Eventos"><span data-icon="calendar"></span><b>Eventos</b></button>
+          <button class="nav-item admin-side-item" data-admin-side-tab="reports" title="Reportes"><span data-icon="trending"></span><b>Reportes</b></button>
+          <button class="nav-item admin-side-item" data-admin-side-tab="moderation" title="Moderación"><span data-icon="shield"></span><b>Moderación</b></button>
+          <button class="nav-item admin-side-item" data-admin-side-tab="settings" title="Configuración"><span data-icon="settings"></span><b>Configuración</b></button>
+        </div>
+      </nav>
+      <div class="sidebar-user">
+        <div class="avatar" id="sidebarAvatar">F</div>
+        <div class="sidebar-user-copy"><strong id="sidebarName">Usuario</strong><small id="sidebarXp">0 XP</small></div>
+        <button id="logoutButton" class="icon-btn" title="Cerrar sesión" data-icon="logout"></button>
+      </div>
+    </aside>
+
+    <main class="main-shell">
+      <header class="topbar">
+        <button class="mobile-menu icon-btn" id="mobileMenu" aria-label="Abrir menú"><span class="menu-lines"></span></button>
+        <div class="topbar-search" id="globalSearchBox" role="search"><span data-icon="search"></span><input id="globalSearch" type="search" placeholder="Buscar tareas, salas, eventos o comunidades…" autocomplete="off" aria-label="Buscar en Focurion" aria-controls="globalSearchResults" aria-expanded="false"><div class="global-search-results" id="globalSearchResults" role="listbox" aria-label="Resultados de búsqueda"></div></div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="themeQuick" title="Cambiar tema" data-icon="sun"></button>
+          <button class="icon-btn" title="Notificaciones" data-icon="bell"></button>
+          <button class="avatar avatar-sm top-profile-button" id="topAvatar" type="button" title="Abrir configuración" aria-label="Abrir configuración del perfil">F</button>
+          <button class="btn btn-primary btn-small" id="quickSession"><span data-icon="bolt"></span> Nueva sesión</button>
+        </div>
+      </header>
+
+      <div class="content-area">
+        <section class="view active" id="view-dashboard">
+          <div class="page-heading">
+            <div><span class="eyebrow">PANEL PRINCIPAL</span><h1>Hola, <span id="welcomeName">estudiante</span></h1><p>Listo para avanzar en tus habilidades hoy.</p></div>
+            <button class="btn btn-secondary" data-open-modal="taskModal">＋ Agregar tarea</button>
+          </div>
+          <div class="metrics-grid" id="dashboardMetrics"></div>
+          <div class="dashboard-grid">
+            <article class="panel span-2"><div class="panel-heading"><div><h2>Tareas pendientes</h2><p>Prioriza lo que te acerca a tus objetivos.</p></div><button class="link-btn" data-view-jump="personal">Ver todas</button></div><div id="dashboardTasks" class="stack-list"></div></article>
+            <article class="panel"><div class="panel-heading"><div><h2>Pomodoro</h2><p>Sesión de enfoque.</p></div><span class="status-dot">Listo</span></div><div class="mini-pomodoro"><strong id="miniPomoTime">25:00</strong><span>Termina una tarea sin distracciones</span><div class="pomodoro-card-actions"><button class="btn btn-primary" data-start-pomodoro><span data-icon="play"></span> Iniciar</button><button class="btn btn-secondary" data-customize-personal-pomodoro><span data-icon="settings"></span> Personalizar</button></div></div></article>
+            <article class="panel"><div class="panel-heading"><div><h2>Próximas fechas</h2><p>Entregas y eventos.</p></div><button class="link-btn" data-view-jump="calendar">Ver calendario</button></div><div id="dashboardEvents" class="stack-list"></div></article>
+            <article class="panel span-2"><div class="panel-heading"><div><h2>Metas semanales</h2><p>Tu avance acumulado.</p></div><button class="link-btn" data-view-jump="personal">Administrar</button></div><div id="dashboardGoals" class="goal-list"></div></article>
+            <article class="panel span-2"><div class="panel-heading"><div><h2>Salas recomendadas</h2><p>Estudia acompañado.</p></div><button class="link-btn" data-view-jump="rooms">Explorar</button></div><div id="dashboardRooms" class="mini-card-grid"></div></article>
+            <article class="panel"><div class="panel-heading"><div><h2>Ranking universitario</h2><p>Top de la comunidad.</p></div><button class="link-btn" data-view-jump="ranking">Ver ranking</button></div><div id="dashboardRanking" class="ranking-mini"></div></article>
+            <article class="panel"><div class="panel-heading"><div><h2>IA Académica</h2><p>Asistente local.</p></div></div><div class="ai-spotlight"><span>✦</span><strong>¿Tienes una duda técnica?</strong><p>Explica conceptos, depura código o crea un plan de estudio.</p><button class="btn btn-gradient" data-view-jump="ai">Preguntar a Focurion AI</button></div></article>
+          </div>
+        </section>
+
+        <section class="view" id="view-personal">
+          <div class="page-heading"><div><span class="eyebrow">ORGANIZACIÓN</span><h1>Centro personal</h1><p>Administra tareas, metas, notas y sesiones de enfoque.</p></div></div>
+          <div class="personal-summary-grid">
+            <article class="panel"><div class="panel-heading"><h2>Pomodoro personal</h2><span class="status-dot">Bloqueante</span></div><div class="pomodoro-circle"><strong id="personalPomoTime">25:00</strong><span>listo para iniciar</span></div><div class="pomodoro-card-actions personal-pomodoro-actions"><button class="btn btn-primary" data-start-pomodoro><span data-icon="play"></span> Iniciar enfoque</button><button class="btn btn-secondary" data-customize-personal-pomodoro><span data-icon="settings"></span> Personalizar</button></div></article>
+            <article class="panel"><div class="panel-heading"><h2>Resumen</h2></div><div id="personalSummary" class="summary-stats"></div></article>
+          </div>
+          <div class="section-tabs" role="tablist">
+            <button class="section-tab active" data-personal-tab="tasks">Tareas</button>
+            <button class="section-tab" data-personal-tab="goals">Metas</button>
+            <button class="section-tab" data-personal-tab="notes">Notas</button>
+          </div>
+          <div class="personal-tab active" id="personal-tasks">
+            <div class="panel"><div class="panel-heading"><div><h2>Mis tareas</h2><p>Marca como completadas o edita su prioridad.</p></div><button class="btn btn-primary btn-small" data-open-modal="taskModal">＋ Nueva tarea</button></div><div id="tasksList" class="stack-list roomy"></div></div>
+          </div>
+          <div class="personal-tab" id="personal-goals">
+            <div class="panel"><div class="panel-heading"><div><h2>Mis metas</h2><p>Actualiza el progreso con pasos medibles.</p></div><button class="btn btn-primary btn-small" data-open-modal="goalModal">＋ Nueva meta</button></div><div id="goalsList" class="goal-card-grid"></div></div>
+          </div>
+          <div class="personal-tab" id="personal-notes">
+            <div class="notes-layout"><div class="panel notes-list-panel"><div class="panel-heading"><h2>Notas</h2><button class="btn btn-primary btn-small" id="newNoteButton">＋ Nueva</button></div><div id="notesList" class="notes-list"></div></div><div class="panel note-editor-panel"><input id="noteTitle" class="note-title-input" placeholder="Título de la nota"><textarea id="noteContent" class="note-content-input" placeholder="Escribe tus apuntes…"></textarea><div class="editor-actions"><span id="noteStatus">Selecciona una nota</span><button class="btn btn-danger btn-small" id="deleteNoteButton" disabled>Eliminar</button><button class="btn btn-primary btn-small" id="saveNoteButton" disabled>Guardar cambios</button></div></div></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-rooms">
+          <div id="roomsListScreen">
+            <div class="page-heading focurion-section-heading"><div><h1>Salas colaborativas</h1><p>Estudia con otros usuarios por tecnología, materia o universidad.</p></div><button class="btn btn-primary" data-open-modal="roomModal"><span data-icon="plus"></span> Crear sala</button></div>
+            <div class="section-toolbar"><div class="search-field"><span data-icon="search"></span><input id="roomSearch" type="search" placeholder="Buscar sala, tema o tecnología…"></div><div id="roomFilterChips" class="filter-chips"></div><select id="roomFilter" class="hidden"><option value="all">Todos los temas</option></select></div>
+            <div id="roomsGrid" class="rooms-showcase-grid"></div>
+          </div>
+          <div id="roomDetailScreen" class="hidden">
+            <button class="back-link" id="backToRooms" type="button"><span data-icon="arrowLeft"></span> Volver a salas</button>
+            <div class="room-detail-title"><div><div class="title-with-badge"><h1 id="roomDetailName">Sala</h1><span class="status-dot" id="roomDetailActive">0 activos</span></div><p id="roomDetailDescription"></p></div></div>
+            <div class="room-detail-layout">
+              <div class="room-detail-main">
+                <article class="panel group-pomodoro-card">
+                  <span class="group-badge"><i data-icon="clock"></i> Pomodoro grupal</span>
+                  <strong id="roomPomoTime">25:00</strong><small id="roomPomoStatus">Sesión lista</small><h2 id="roomPomoGoal">Bloque de estudio profundo</h2>
+                  <div class="room-pomo-progress"><span id="roomPomoProgress"></span></div>
+                  <div class="room-pomo-actions"><button class="btn btn-gradient" id="startRoomFocus"><span data-icon="play"></span> Iniciar enfoque</button><button class="btn btn-ghost" id="customizeRoomFocus"><span data-icon="settings"></span> Personalizar</button><button class="btn btn-secondary" id="leaveRoom">Salir</button></div>
+                </article>
+                <div class="room-lower-grid">
+                  <article class="panel"><div class="panel-heading"><h2>Objetivos de la sesión</h2><button class="icon-btn" id="addRoomObjective" title="Agregar objetivo" data-icon="plus"></button></div><div id="roomObjectives" class="room-objectives"></div></article>
+                  <article class="panel"><div class="panel-heading"><h2>Recursos compartidos</h2><button class="icon-btn" id="addRoomResource" title="Compartir recurso" data-icon="plus"></button></div><div id="roomResources" class="room-resources"></div></article>
+                </div>
+              </div>
+              <aside class="room-detail-side">
+                <article class="panel room-members-card"><div class="panel-heading"><h2>Usuarios conectados</h2><span id="roomMembersTotal" class="subtle-count">0 en total</span></div><div id="roomMembers" class="member-status-list"></div></article>
+                <article class="panel room-chat-panel"><div class="panel-heading"><h2>Chat de la sala</h2></div><div id="roomChatMessages" class="room-chat-messages"></div><form id="roomChatForm" class="room-chat-composer"><input id="roomChatInput" placeholder="Escribe un mensaje…" autocomplete="off" required><button class="send-button" type="submit" title="Enviar" data-icon="send"></button></form></article>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-ai">
+          <div class="page-heading"><div><span class="eyebrow">ASISTENTE LOCAL</span><h1>IA Académica</h1><p>Explicaciones y guías generadas localmente, sin usar APIs externas.</p></div><span class="local-badge">● Motor local</span></div>
+          <div class="ai-layout">
+            <article class="panel ai-chat-panel"><div id="aiMessages" class="chat-messages"><div class="chat-message assistant"><div class="avatar avatar-sm">✦</div><div><strong>Focurion AI</strong><p>Hola. Puedo explicar conceptos, crear quizzes, proponer planes de estudio y ayudarte a depurar paso a paso.</p></div></div></div><div class="ai-mode-row"><button class="chip active" data-ai-mode="explain">Explicar</button><button class="chip" data-ai-mode="debug">Depurar</button><button class="chip" data-ai-mode="quiz">Crear quiz</button><button class="chip" data-ai-mode="study">Plan de estudio</button><button class="chip" data-ai-mode="summary">Resumir</button></div><form id="aiForm" class="chat-composer"><textarea id="aiPrompt" placeholder="Pregunta sobre código, redes, bases de datos, cálculo…" required></textarea><button class="btn btn-gradient" type="submit">Enviar ✦</button></form></article>
+            <aside class="ai-side"><article class="panel"><div class="panel-heading"><h2>Recomendaciones</h2></div><div class="tip-card"><strong>Concepto clave</strong><p>Intenta explicar el tema con tus propias palabras.</p></div><div class="tip-card"><strong>Práctica sugerida</strong><p>Crea un ejemplo pequeño y comprueba el resultado.</p></div></article><article class="panel"><div class="panel-heading"><h2>Historial reciente</h2></div><div id="aiHistory" class="history-list"></div></article></aside>
+          </div>
+        </section>
+
+        <section class="view" id="view-communities">
+          <div id="communitiesLanding">
+            <div class="page-heading focurion-section-heading"><div><h1>Comunidades</h1><p>Conecta, aprende y colabora con estudiantes tech de diferentes universidades.</p></div><div class="heading-actions"><button class="btn btn-secondary" id="quickShareResource"><span data-icon="upload"></span> Compartir recurso</button><button class="btn btn-primary" data-open-modal="communityModal"><span data-icon="plus"></span> Crear comunidad</button></div></div>
+            <div class="section-toolbar communities-toolbar"><div class="search-field"><span data-icon="search"></span><input id="communitySearch" type="search" placeholder="Buscar comunidad, universidad, tecnología o recurso…"></div><select id="communityFilter" class="hidden"><option value="all">Todas las categorías</option></select></div>
+            <div class="filter-chips community-filter-chips" id="communityFilterChips"><button class="active" data-community-filter="all">Todas</button><button data-community-filter="joined">Mis comunidades</button><button data-community-filter="recommended">Recomendadas</button><button data-community-filter="México">México</button><button data-community-filter="active">Más activas</button><button data-community-filter="new">Nuevas</button></div>
+            <div class="communities-overview-grid">
+              <div>
+                <article class="panel community-activity-card"><h2><span data-icon="trending"></span> Tu actividad en comunidades</h2><div id="communityActivityMetrics" class="community-activity-metrics"></div></article>
+                <h2 class="section-title"><span data-icon="network"></span> Mis comunidades</h2><div id="joinedCommunitiesGrid" class="joined-community-grid"></div>
+                <h2 class="section-title"><span data-icon="target"></span> Explorar comunidades</h2><div id="communitiesGrid" class="explore-community-grid"></div>
+              </div>
+              <aside class="communities-side"><article class="panel trends-card"><h2><span>#</span> Tendencias tech</h2><div class="trend-tags"><button>#React</button><button>#SQL</button><button>#Ciberseguridad</button><button>#IA</button><button>#ProyectoIntegrador</button><button>#GitHub</button></div></article><article class="panel create-community-card"><h2>¿No encuentras tu espacio?</h2><p>Inicia una nueva comunidad para tu universidad o un tema específico.</p><button class="btn btn-gradient btn-block" data-open-modal="communityModal">Crear comunidad</button></article></aside>
+            </div>
+          </div>
+          <div id="communityDetail" class="hidden">
+            <button class="back-link" id="backToCommunities" type="button"><span data-icon="arrowLeft"></span> Volver a comunidades</button>
+            <div class="community-hero"><div class="community-monogram" id="communityMonogram">UP</div><div class="community-hero-copy"><div class="title-with-badge"><h1 id="communityDetailName">Comunidad</h1><span class="member-badge">Miembro</span></div><p id="communityDetailDescription"></p></div><div class="community-hero-actions"><button class="btn btn-secondary" id="heroCreatePost">Crear publicación</button><button class="btn btn-primary" id="heroJoinRoom">Unirse a sala</button><button class="btn btn-ghost" id="heroShareResource">Compartir recurso</button></div></div>
+            <div id="communityDetailStats" class="community-detail-stats"></div>
+            <div class="community-tabs" id="communityTabs"><button class="active" data-community-tab="home">Inicio</button><button data-community-tab="posts">Publicaciones</button><button data-community-tab="resources">Recursos</button><button data-community-tab="projects">Proyectos</button><button data-community-tab="rooms">Salas</button><button data-community-tab="challenges">Retos</button><button data-community-tab="members">Miembros</button></div>
+            <div id="communityTabContent" class="community-tab-content"></div>
+            <form id="postForm" class="hidden"><textarea id="postContent" required></textarea></form>
+            <div id="communityEmpty" class="hidden"></div><div id="communityFeed" class="hidden"><span id="feedTitle"></span><span id="feedDescription"></span><div id="postsList"></div></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-ranking">
+          <div class="page-heading"><div><span class="eyebrow">PROGRESO</span><h1>Ranking</h1><p>Compara tu avance y mantén tu racha activa.</p></div></div>
+          <div class="ranking-layout"><article class="panel"><div class="panel-heading"><h2>Ranking general</h2><span class="status-dot">Global</span></div><div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Usuario</th><th>Universidad</th><th>XP</th><th>Racha</th></tr></thead><tbody id="rankingTable"></tbody></table></div></article><aside><article class="panel progress-profile" id="rankingProfile"></article><article class="panel"><div class="panel-heading"><h2>Top universidades</h2></div><div id="universityRanking" class="ranking-mini"></div></article></aside></div>
+        </section>
+
+        <section class="view" id="view-calendar">
+          <div class="page-heading"><div><span class="eyebrow">PLANIFICACIÓN</span><h1>Calendario</h1><p>Consulta entregas, exámenes y sesiones de estudio.</p></div><button class="btn btn-primary" data-open-modal="eventModal">＋ Agregar evento</button></div>
+          <div class="calendar-layout"><article class="panel"><div class="calendar-toolbar"><button class="icon-btn" id="prevMonth">‹</button><h2 id="calendarTitle">Mes</h2><button class="icon-btn" id="nextMonth">›</button><button class="btn btn-secondary btn-small" id="todayButton">Hoy</button></div><div class="calendar-weekdays"><span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span></div><div id="calendarGrid" class="calendar-grid"></div></article><aside class="panel"><div class="panel-heading"><h2>Próximas fechas</h2></div><div id="calendarUpcoming" class="stack-list"></div></aside></div>
+        </section>
+
+        <section class="view" id="view-settings">
+          <div class="page-heading"><div><span class="eyebrow">PREFERENCIAS</span><h1>Configuración</h1><p>Administra tu cuenta, productividad y experiencia.</p></div></div>
+          <form id="settingsForm" class="settings-grid">
+            <article class="panel span-2"><div class="panel-heading"><h2>Perfil de usuario</h2></div><div class="profile-editor"><div class="avatar avatar-xl" id="settingsAvatar">F</div><div><strong id="settingsNamePreview">Usuario</strong><p id="settingsEmail"></p></div></div><div class="form-grid-2"><label>Nombre completo<input name="name" required></label><label>Universidad<input name="university"></label></div><label>Carrera<input name="career"></label></article>
+            <article class="panel"><div class="panel-heading"><h2>Preferencias</h2></div><label>Tema<select name="theme"><option value="dark">Oscuro</option><option value="light">Claro</option></select></label><label>Barra lateral<select name="sidebar_behavior"><option value="dynamic">Dinámica · se abre al pasar el puntero</option><option value="manual">Manual · controlar con la flecha</option></select></label><label>Idioma<select name="language"><option value="es">Español</option><option value="en">English</option></select></label><label>Zona horaria<input name="timezone"></label><label class="switch-row">Notificaciones<input name="notifications" type="checkbox"><span class="switch"></span></label></article>
+            <article class="panel span-2"><div class="panel-heading"><h2>Productividad</h2></div><div class="form-grid-4"><label>Pomodoro (min)<input name="pomodoro_minutes" type="number" min="1" max="90"></label><label>Descanso corto<input name="short_break_minutes" type="number" min="0" max="30"></label><label>Descanso largo<input name="long_break_minutes" type="number" min="0" max="60"></label><label>Meta semanal (h)<input name="weekly_goal_hours" type="number" min="1" max="80"></label></div></article>
+            <article class="panel"><div class="panel-heading"><h2>Seguridad</h2></div><label>Contraseña actual<input id="currentPassword" type="password"></label><label>Nueva contraseña<input id="newPassword" type="password" minlength="8"></label><button class="btn btn-secondary btn-block" id="changePasswordButton" type="button">Cambiar contraseña</button></article>
+            <div class="settings-submit span-3"><button class="btn btn-primary" type="submit">Guardar cambios</button></div>
+          </form>
+        </section>
+
+        <section class="view" id="view-admin">
+          <div class="page-heading admin-heading"><div><span class="eyebrow">CONTROL DEL SISTEMA</span><h1>Administración de Focurion</h1><p>Gestiona usuarios, comunidades, salas, eventos, reportes y moderación.</p></div><button class="btn btn-primary" data-open-modal="adminUserModal">＋ Nuevo registro</button></div>
+          <div class="admin-layout">
+            <aside class="admin-subnav panel" aria-label="Secciones de administración">
+              <button class="admin-tab active" data-admin-tab="dashboard"><span data-icon="home"></span> Panel</button>
+              <button class="admin-tab" data-admin-tab="users"><span data-icon="users"></span> Usuarios</button>
+              <button class="admin-tab" data-admin-tab="communities"><span data-icon="network"></span> Comunidades</button>
+              <button class="admin-tab" data-admin-tab="rooms"><span data-icon="message"></span> Salas</button>
+              <button class="admin-tab" data-admin-tab="events"><span data-icon="calendar"></span> Eventos</button>
+              <button class="admin-tab" data-admin-tab="reports"><span data-icon="trending"></span> Reportes</button>
+              <button class="admin-tab" data-admin-tab="moderation"><span data-icon="shield"></span> Moderación</button>
+              <button class="admin-tab" data-admin-tab="settings"><span data-icon="settings"></span> Configuración</button>
+            </aside>
+            <div class="admin-content">
+              <div class="admin-panel active" data-admin-panel="dashboard">
+                <div id="adminMetrics" class="metrics-grid"></div>
+                <div class="admin-dashboard-grid">
+                  <article class="panel span-2"><div class="panel-heading"><div><h2>Actividad de usuarios</h2><p>Actividad registrada durante los últimos siete días.</p></div></div><div id="adminActivityChart" class="admin-line-chart"></div></article>
+                  <article class="panel"><div class="panel-heading"><h2>Accesos rápidos</h2></div><div class="admin-quick-grid"><button data-admin-go="users">♙<span>Registrar usuario</span></button><button data-admin-go="communities">♧<span>Comunidad</span></button><button data-admin-go="rooms">▣<span>Crear sala</span></button><button data-admin-go="events">▦<span>Agendar evento</span></button><button data-admin-go="moderation">◉<span>Moderación</span></button></div></article>
+                  <article class="panel span-2"><div class="panel-heading"><div><h2>Usuarios recientes</h2><p>Últimos registros en la plataforma.</p></div><button class="link-btn" data-admin-go="users">Ver todos</button></div><div class="table-wrap"><table><thead><tr><th>Usuario</th><th>Universidad</th><th>Rol</th><th>Estado</th><th>XP</th></tr></thead><tbody id="adminRecentUsers"></tbody></table></div></article>
+                  <article class="panel"><div class="panel-heading"><h2>Actividad reciente</h2></div><div id="adminRecentActivity" class="history-list admin-history"></div></article>
+                  <article class="panel admin-alert-panel"><div class="panel-heading"><h2>Alertas administrativas</h2></div><div id="adminAlerts" class="admin-alerts"></div><button class="btn btn-danger btn-block" data-admin-go="moderation">Revisar incidencias</button></article>
+                </div>
+              </div>
+
+              <div class="admin-panel" data-admin-panel="users">
+                <div class="admin-section-heading"><div><h2>Usuarios</h2><p>Gestiona todos los usuarios registrados en Focurion.</p></div><button class="btn btn-primary btn-small" data-open-modal="adminUserModal">Registrar usuario</button></div>
+                <div class="filter-bar"><input id="adminUserSearch" type="search" placeholder="Buscar usuario o correo…"><select id="adminUserStatus"><option value="all">Todos</option><option value="active">Activos</option><option value="pending">Pendientes</option><option value="suspended">Suspendidos</option></select></div>
+                <article class="panel"><div class="table-wrap"><table><thead><tr><th>Usuario</th><th>Correo</th><th>Universidad</th><th>Rol</th><th>Estado</th><th>XP</th><th>Acciones</th></tr></thead><tbody id="adminUsersTable"></tbody></table></div></article>
+              </div>
+
+              <div class="admin-panel" data-admin-panel="communities">
+                <div class="admin-section-heading"><div><h2>Comunidades</h2><p>Administra las comunidades universitarias.</p></div><button class="btn btn-primary btn-small" data-open-modal="adminCommunityModal">Crear comunidad</button></div>
+                <div class="filter-bar"><input id="adminCommunitySearch" type="search" placeholder="Buscar comunidad…"><select id="adminCommunityStatus"><option value="all">Todos</option><option value="active">Activas</option><option value="pending">Pendientes</option><option value="suspended">Suspendidas</option></select></div>
+                <article class="panel"><div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Universidad</th><th>Miembros</th><th>Salas</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="adminCommunitiesTable"></tbody></table></div></article>
+              </div>
+
+              <div class="admin-panel" data-admin-panel="rooms">
+                <div class="admin-section-heading"><div><h2>Salas</h2><p>Gestiona las salas colaborativas activas.</p></div><button class="btn btn-primary btn-small" data-open-modal="adminRoomModal">Crear sala</button></div>
+                <div class="filter-bar"><input id="adminRoomSearch" type="search" placeholder="Buscar sala…"><select id="adminRoomStatus"><option value="all">Todas</option><option value="active">Activas</option><option value="pending">Pendientes</option><option value="closed">Cerradas</option></select></div>
+                <article class="panel"><div class="table-wrap"><table><thead><tr><th>Sala</th><th>Comunidad</th><th>Categoría</th><th>Tipo</th><th>Usuarios</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="adminRoomsTable"></tbody></table></div></article>
+              </div>
+
+              <div class="admin-panel" data-admin-panel="events">
+                <div class="admin-section-heading"><div><h2>Eventos comunitarios</h2><p>Administra eventos oficiales, retos, talleres y solicitudes.</p></div><button class="btn btn-primary btn-small" data-open-modal="adminEventModal">Crear evento oficial</button></div>
+                <div id="adminEventMetrics" class="metrics-grid compact-metrics"></div>
+                <div class="admin-events-layout"><article class="panel"><div class="filter-bar"><input id="adminEventSearch" type="search" placeholder="Buscar evento…"><select id="adminEventStatus"><option value="all">Todos</option><option value="scheduled">Programados</option><option value="active">Activos</option><option value="pending">Pendientes</option><option value="rejected">Rechazados</option></select></div><div class="table-wrap"><table><thead><tr><th>Evento</th><th>Tipo</th><th>Comunidad</th><th>Fecha</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="adminEventsTable"></tbody></table></div></article><aside class="panel"><div class="panel-heading"><h2>Solicitudes de eventos</h2></div><div id="adminEventRequests" class="request-list"></div></aside></div>
+              </div>
+
+              <div class="admin-panel" data-admin-panel="reports">
+                <div class="admin-section-heading"><div><h2>Reportes</h2><p>Consulta el comportamiento general de la plataforma.</p></div><a class="btn btn-secondary btn-small" href="/api/admin/reports/export">Exportar reporte</a></div>
+                <div id="adminReportMetrics" class="metrics-grid"></div>
+                <div class="report-grid"><article class="panel"><div class="panel-heading"><h2>Usuarios activos</h2></div><div id="adminUsersChart" class="admin-bar-chart"></div></article><article class="panel"><div class="panel-heading"><h2>Participación por comunidad</h2></div><div id="adminCommunityChart" class="admin-bar-chart vertical"></div></article><article class="panel"><div class="panel-heading"><h2>Top categorías</h2></div><div id="adminTopCategories" class="ranking-mini"></div></article><article class="panel"><div class="panel-heading"><h2>Top usuarios (XP)</h2></div><div id="adminTopUsers" class="ranking-mini"></div></article></div>
+              </div>
+
+              <div class="admin-panel" data-admin-panel="moderation">
+                <div class="admin-section-heading"><div><h2>Moderación</h2><p>Revisa reportes, incidencias y solicitudes pendientes.</p></div></div>
+                <div class="filter-bar"><input id="adminModerationSearch" type="search" placeholder="Buscar incidencia…"><select id="adminModerationStatus"><option value="all">Todas</option><option value="pending">Pendientes</option><option value="resolved">Resueltas</option><option value="dismissed">Descartadas</option></select></div>
+                <article class="panel"><div class="table-wrap"><table><thead><tr><th>Tipo</th><th>Nombre</th><th>Motivo</th><th>Fecha</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="adminModerationTable"></tbody></table></div></article>
+              </div>
+
+              <div class="admin-panel" data-admin-panel="settings">
+                <div class="admin-section-heading"><div><h2>Configuración administrativa</h2><p>Administra tu cuenta y las preferencias del panel.</p></div></div>
+                <form id="adminSettingsForm" class="settings-grid">
+                  <article class="panel span-2"><div class="panel-heading"><h2>Perfil administrador</h2></div><div class="profile-editor"><div class="avatar avatar-xl">AD</div><div><strong id="adminProfileName">Administrador</strong><p id="adminProfileEmail">admin@focurion.local</p></div></div><div class="form-grid-2"><label>Nombre<input name="name" required></label><label>Correo<input name="email" type="email" disabled></label></div><button class="btn btn-primary" type="submit">Guardar cambios</button></article>
+                  <article class="panel"><div class="panel-heading"><h2>Preferencias</h2></div><label>Barra lateral<select name="sidebar_behavior"><option value="dynamic">Dinámica · se abre al pasar el puntero</option><option value="manual">Manual · controlar con la flecha</option></select></label><label class="switch-row">Tema oscuro<input name="admin_theme" type="checkbox"><span class="switch"></span></label><label class="switch-row">Notificaciones de reportes<input name="report_notifications" type="checkbox"><span class="switch"></span></label><label class="switch-row">Alertas de salas<input name="room_alerts" type="checkbox"><span class="switch"></span></label></article>
+                  <article class="panel span-2"><div class="panel-heading"><h2>Permisos del sistema</h2></div><label class="switch-row">Permitir nuevos registros<input name="allow_registration" type="checkbox"><span class="switch"></span></label><label class="switch-row">Aprobar comunidades automáticamente<input name="community_auto_approval" type="checkbox"><span class="switch"></span></label><p class="muted-copy">Los permisos de administración, moderación y gestión se controlan desde los roles de usuario.</p></article>
+                  <article class="panel"><div class="panel-heading"><h2>Seguridad</h2></div><label>Contraseña actual<input id="adminCurrentPassword" type="password"></label><label>Nueva contraseña<input id="adminNewPassword" type="password" minlength="8"></label><button class="btn btn-secondary btn-block" id="adminChangePassword" type="button">Actualizar contraseña</button></article>
+                  <article class="panel span-2 backup-panel" id="adminBackupPanel"><div class="panel-heading"><div><h2>Respaldo de datos</h2><p>Descarga una copia JSON de usuarios, calendario, tareas, comunidades, publicaciones, recursos, salas y actividad.</p></div><span class="backup-panel-icon" data-icon="database"></span></div><p class="muted-copy">El respaldo no incluye contraseñas ni códigos de recuperación. Guárdalo en un lugar seguro.</p><button class="btn btn-secondary" id="downloadBackupButton" type="button"><span data-icon="download"></span> Descargar respaldo</button></article>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toastContainer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <div class="modal" id="taskModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="taskForm"><div class="modal-heading"><div><span class="eyebrow">NUEVA TAREA</span><h2>Agregar tarea</h2></div><button type="button" class="icon-btn" data-close-modal>×</button></div><label>Título<input name="title" required></label><label>Descripción<textarea name="description"></textarea></label><div class="form-grid-2"><label>Fecha límite<input name="due_date" type="date"></label><label>Prioridad<select name="priority"><option value="low">Baja</option><option value="medium" selected>Media</option><option value="high">Alta</option></select></label></div><button class="btn btn-primary btn-block" type="submit">Guardar tarea</button></form></div>
+  <div class="modal" id="goalModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="goalForm"><div class="modal-heading"><div><span class="eyebrow">NUEVA META</span><h2>Crear meta</h2></div><button type="button" class="icon-btn" data-close-modal>×</button></div><label>Título<input name="title" required></label><div class="form-grid-2"><label>Objetivo<input name="target" type="number" min="1" value="5" required></label><label>Unidad<input name="unit" value="sesiones"></label></div><label>Fecha límite<input name="due_date" type="date"></label><button class="btn btn-primary btn-block" type="submit">Guardar meta</button></form></div>
+  <div class="modal" id="roomModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="roomForm"><div class="modal-heading"><div><span class="eyebrow">COLABORACIÓN</span><h2>Crear sala</h2></div><button type="button" class="icon-btn" data-close-modal>×</button></div><input name="community_id" type="hidden"><label>Nombre<input name="name" required></label><label>Tema<input name="topic" placeholder="Programación, Redes, Cálculo…"></label><label>Descripción<textarea name="description"></textarea></label><div class="form-grid-2"><label>Capacidad<input name="capacity" type="number" min="2" max="500" value="30"></label><label class="switch-row">Sala privada<input name="is_private" type="checkbox"><span class="switch"></span></label></div><label>Código de acceso (si es privada)<input name="access_code"></label><button class="btn btn-primary btn-block" type="submit">Crear sala</button></form></div>
+  <div class="modal" id="communityModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="communityForm"><div class="modal-heading"><div><span class="eyebrow">COMUNIDAD</span><h2>Crear comunidad</h2></div><button type="button" class="icon-btn" data-close-modal>×</button></div><label>Nombre<input name="name" required></label><label>Categoría<input name="category" placeholder="Tecnología"></label><label>Descripción<textarea name="description"></textarea></label><label class="switch-row">Comunidad privada<input name="is_private" type="checkbox"><span class="switch"></span></label><button class="btn btn-primary btn-block" type="submit">Crear comunidad</button></form></div>
+  <div class="modal" id="eventModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="eventForm"><input name="event_id" type="hidden"><div class="modal-heading"><div><span class="eyebrow">CALENDARIO</span><h2 id="eventModalTitle">Agregar evento</h2><p id="eventModalHint">Completa los datos para guardar una nueva fecha.</p></div><button type="button" class="icon-btn" data-close-modal>×</button></div><label>Título<input name="title" required></label><label>Descripción<textarea name="description"></textarea></label><label>Fecha del evento<span class="date-input-shell"><input id="eventDateInput" name="start_date" type="date" required><button id="eventDatePickerButton" class="date-picker-button" type="button" aria-label="Abrir calendario" title="Abrir calendario"><span data-icon="calendar"></span></button></span></label><label>Color<input name="color" type="color" value="#5b8cff"></label><div class="modal-actions event-modal-actions"><button class="btn btn-danger hidden" id="deleteEventButton" type="button"><span data-icon="close"></span> Eliminar</button><button class="btn btn-primary" id="eventSubmitButton" type="submit"><span data-icon="check"></span> Guardar evento</button></div></form></div>
+  <div class="modal" id="roomPomodoroModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="roomPomodoroForm"><div class="modal-heading"><div><h2>Personalizar Pomodoro</h2><p>Configura la duración de la sesión y sus bloques.</p></div><button type="button" class="icon-btn" data-close-modal data-icon="close"></button></div><div class="pomodoro-presets-wrap"><strong>Enfoques predeterminados</strong><div class="pomodoro-presets" data-pomodoro-presets="room"></div></div><div class="form-grid-2"><label>Duración total (min)<input name="total" type="number" min="5" max="300" value="120"></label><label>Tiempo de enfoque<input name="focus" type="number" min="1" max="90" value="25"></label></div><div class="form-grid-2"><label>Tiempo de descanso<input name="shortBreak" type="number" min="0" max="30" value="5"></label><label>Descanso largo<input name="longBreak" type="number" min="0" max="60" value="15"></label></div><label>Repetición de descanso largo<select name="longEvery"><option value="4">Cada 4 bloques</option><option value="3">Cada 3 bloques</option><option value="2">Cada 2 bloques</option></select></label><label>Objetivo de sesión<input name="goal" value="Bloque de estudio profundo" maxlength="160"></label><div class="pomodoro-preview" id="roomPomoPreview"></div><div class="modal-actions"><button class="btn btn-secondary" type="button" data-close-modal>Cancelar</button><button class="btn btn-gradient" type="submit">Guardar</button><button class="btn btn-primary" id="saveAndStartRoomPomo" type="button">Iniciar enfoque</button></div></form></div>
+  <div class="modal" id="personalPomodoroModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="personalPomodoroForm"><div class="modal-heading"><div><h2 id="personalPomoModalTitle">Personalizar Pomodoro</h2><p id="personalPomoModalHint">La duración total se reparte entre enfoque y descansos.</p></div><button type="button" class="icon-btn" data-close-modal data-icon="close"></button></div><div class="pomodoro-presets-wrap"><strong>Enfoques predeterminados</strong><div class="pomodoro-presets" data-pomodoro-presets="personal"></div></div><div class="form-grid-2"><label>Duración total (min)<input name="total" type="number" min="5" max="300" value="120" required></label><label>Tiempo de enfoque<input name="focus" type="number" min="1" max="90" value="25" required></label></div><div class="form-grid-2"><label>Tiempo de descanso<input name="shortBreak" type="number" min="0" max="30" value="5" required></label><label>Descanso largo<input name="longBreak" type="number" min="0" max="60" value="15" required></label></div><label>Repetición de descanso largo<select name="longEvery"><option value="4">Cada 4 bloques</option><option value="3">Cada 3 bloques</option><option value="2">Cada 2 bloques</option></select></label><label>Objetivo de sesión<input name="goal" value="Bloque de estudio profundo" maxlength="160"></label><div class="pomodoro-preview" id="personalPomoPreview"></div><div class="modal-actions"><button class="btn btn-secondary" type="button" data-close-modal>Cancelar</button><button class="btn btn-gradient" type="submit">Guardar</button><button class="btn btn-primary" id="saveAndStartPersonalPomo" type="button">Iniciar enfoque</button></div></form></div>
+  <div class="modal" id="roomObjectiveModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="roomObjectiveForm"><div class="modal-heading"><h2>Agregar objetivo</h2><button type="button" class="icon-btn" data-close-modal data-icon="close"></button></div><label>Objetivo de estudio<input name="content" placeholder="Ej. Terminar componentes de React" maxlength="240" required></label><button class="btn btn-primary btn-block" type="submit">Agregar objetivo</button></form></div>
+  <div class="modal" id="roomResourceModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="roomResourceForm"><div class="modal-heading"><h2>Compartir recurso</h2><button type="button" class="icon-btn" data-close-modal data-icon="close"></button></div><label>Título<input name="title" required></label><label>Enlace<input name="url" type="url" placeholder="https://..." required></label><label>Tipo<select name="resource_type"><option value="link">Enlace</option><option value="document">Documento</option><option value="repository">Repositorio</option><option value="video">Video</option></select></label><button class="btn btn-primary btn-block" type="submit">Compartir recurso</button></form></div>
+  <div class="modal" id="communityPostModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="communityPostForm"><div class="modal-heading"><h2>Crear publicación</h2><button type="button" class="icon-btn" data-close-modal data-icon="close"></button></div><label>¿Qué quieres compartir?<textarea name="content" placeholder="Comparte una duda, recurso, avance o proyecto…" required></textarea></label><button class="btn btn-primary btn-block" type="submit">Publicar</button></form></div>
+  <div class="modal" id="communityResourceModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="communityResourceForm"><div class="modal-heading"><h2>Compartir recurso</h2><button type="button" class="icon-btn" data-close-modal data-icon="close"></button></div><label>Título<input name="title" required></label><label>Descripción<textarea name="description"></textarea></label><div class="form-grid-2"><label>Enlace<input name="url" type="url" placeholder="https://..." required></label><label>Tipo<select name="resource_type"><option value="link">Link</option><option value="pdf">PDF / Apuntes</option><option value="repository">Repositorio</option><option value="video">Video</option><option value="notes">Notas</option></select></label></div><button class="btn btn-primary btn-block" type="submit">Compartir recurso</button></form></div>
+  <div class="modal" id="communityProjectModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="communityProjectForm"><div class="modal-heading"><h2>Publicar proyecto</h2><button type="button" class="icon-btn" data-close-modal data-icon="close"></button></div><label>Nombre del proyecto<input name="title" required></label><label>Descripción<textarea name="description"></textarea></label><div class="form-grid-2"><label>Tecnologías<input name="stack" placeholder="HTML, CSS, JavaScript"></label><label>Estado<select name="status"><option value="development">En desarrollo</option><option value="review">En revisión</option><option value="completed">Terminado</option></select></label></div><label>Enlace opcional<input name="project_url" type="url" placeholder="https://..."></label><button class="btn btn-primary btn-block" type="submit">Publicar proyecto</button></form></div>
+  <div class="modal" id="communityChallengeModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="communityChallengeForm"><div class="modal-heading"><h2>Crear reto</h2><button type="button" class="icon-btn" data-close-modal data-icon="close"></button></div><label>Nombre del reto<input name="title" required></label><label>Descripción<textarea name="description"></textarea></label><div class="form-grid-2"><label>Dificultad<select name="difficulty"><option>Básica</option><option>Intermedia</option><option>Avanzada</option></select></label><label>Recompensa XP<input name="xp" type="number" min="10" value="50"></label></div><label>Tiempo estimado<input name="estimated_time" value="1 día"></label><button class="btn btn-primary btn-block" type="submit">Crear reto</button></form></div>
+
+
+  <div class="modal" id="adminUserModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="adminUserForm"><div class="modal-heading"><div><span class="eyebrow">ADMINISTRACIÓN</span><h2>Registrar usuario</h2></div><button type="button" class="icon-btn" data-close-modal>×</button></div><div class="form-grid-2"><label>Nombre<input name="name" required></label><label>Correo<input name="email" type="email" required></label></div><div class="form-grid-2"><label>Universidad<input name="university" value="UPSIN"></label><label>Carrera<input name="career" value="Tecnologías de la Información"></label></div><div class="form-grid-2"><label>Rol<select name="role"><option value="student">Estudiante</option><option value="moderator">Moderador</option><option value="admin">Administrador</option></select></label><label>Estado<select name="status"><option value="active">Activo</option><option value="pending">Pendiente</option><option value="suspended">Suspendido</option></select></label></div><label>Contraseña temporal<input name="password" value="Demo123!" minlength="8"></label><button class="btn btn-primary btn-block" type="submit">Registrar usuario</button></form></div>
+  <div class="modal" id="adminCommunityModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="adminCommunityForm"><div class="modal-heading"><div><span class="eyebrow">ADMINISTRACIÓN</span><h2>Crear comunidad</h2></div><button type="button" class="icon-btn" data-close-modal>×</button></div><div class="form-grid-2"><label>Nombre<input name="name" required></label><label>Universidad<input name="university" value="UPSIN"></label></div><label>Categoría<input name="category" value="Tecnología"></label><label>Descripción<textarea name="description"></textarea></label><div class="form-grid-2"><label>Estado<select name="status"><option value="active">Activa</option><option value="pending">Pendiente</option><option value="suspended">Suspendida</option></select></label><label class="switch-row">Privada<input name="is_private" type="checkbox"><span class="switch"></span></label></div><button class="btn btn-primary btn-block" type="submit">Crear comunidad</button></form></div>
+  <div class="modal" id="adminRoomModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="adminRoomForm"><div class="modal-heading"><div><span class="eyebrow">ADMINISTRACIÓN</span><h2>Crear sala</h2></div><button type="button" class="icon-btn" data-close-modal>×</button></div><label>Nombre<input name="name" required></label><div class="form-grid-2"><label>Comunidad<select name="community_id" id="adminRoomCommunity"><option value="">Sin comunidad</option></select></label><label>Categoría<input name="category" value="Programación"></label></div><label>Tema<input name="topic" value="General"></label><label>Descripción<textarea name="description"></textarea></label><div class="form-grid-2"><label>Capacidad<input name="capacity" type="number" min="2" value="30"></label><label>Estado<select name="status"><option value="active">Activa</option><option value="pending">Pendiente</option><option value="closed">Cerrada</option></select></label></div><button class="btn btn-primary btn-block" type="submit">Crear sala</button></form></div>
+  <div class="modal" id="adminEventModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><form class="modal-card" id="adminEventForm"><div class="modal-heading"><div><span class="eyebrow">ADMINISTRACIÓN</span><h2>Crear evento oficial</h2></div><button type="button" class="icon-btn" data-close-modal>×</button></div><label>Título<input name="title" required></label><div class="form-grid-2"><label>Tipo<select name="type"><option>Webinar</option><option>Taller</option><option>Sesión grupal</option><option>Reto</option><option>Evento oficial</option></select></label><label>Comunidad<select name="community_id" id="adminEventCommunity"><option value="">General</option></select></label></div><label>Descripción<textarea name="description"></textarea></label><div class="form-grid-2"><label>Fecha<input name="start_date" type="date" required></label><label>Hora<input name="start_time" type="time" value="18:00"></label></div><div class="form-grid-2"><label>Estado<select name="status"><option value="scheduled">Programado</option><option value="active">Activo</option><option value="pending">Pendiente</option></select></label><label class="switch-row">Evento oficial<input name="is_official" type="checkbox" checked><span class="switch"></span></label></div><button class="btn btn-primary btn-block" type="submit">Crear evento</button></form></div>
+
+  <div id="pomodoroOverlay" class="pomodoro-overlay" aria-hidden="true">
+    <div class="focus-orb orb-a"></div><div class="focus-orb orb-b"></div>
+    <div class="focus-session-card">
+      <img src="/assets/logo.png" alt="" class="focus-logo">
+      <span class="eyebrow">SESIÓN BLOQUEANTE</span>
+      <h2 id="focusLabel">Tiempo de enfoque</h2>
+      <div class="focus-timer" id="focusTimer">25:00</div>
+      <div class="focus-progress"><span id="focusProgress"></span></div>
+      <p id="focusTaskLabel">Mantén esta pantalla abierta. La navegación está bloqueada mientras estudias.</p>
+      <div class="focus-actions"><button class="btn btn-secondary" id="focusPause">Pausar</button><button class="btn btn-danger" id="focusAbandon">Abandonar</button></div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/icons.js"></script>
+  <script src="/js/app.js?v=20260805-community-reactions"></script>
+</body>
+</html>

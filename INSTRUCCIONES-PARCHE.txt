@@ -1,0 +1,14 @@
+FOCURION MYSQL 2.1 — CARPETA COMPLETA
+
+Esta carpeta ya contiene todas las actualizaciones integradas. No necesitas
+copiar archivos ni aplicar parches anteriores.
+
+Inicia MySQL en XAMPP y utiliza:
+- Windows: iniciar-focurion.bat
+- macOS: iniciar-focurion.command
+
+La base y las tablas se crean automáticamente. Si ya existe una base
+Focurion, sus registros se conservan y únicamente se completa el contenido
+inicial que haga falta.
+
+Lee README.md para la instalación, el respaldo y la solución de problemas.

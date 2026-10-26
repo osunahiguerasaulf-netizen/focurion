@@ -1,0 +1,10 @@
+La aplicación crea automáticamente la base de datos y sus tablas al ejecutar npm start.
+
+Para crearla manualmente:
+1. Inicia Apache y MySQL en XAMPP.
+2. Abre http://localhost/phpmyadmin
+3. Selecciona Importar.
+4. Elige schema.sql.
+5. Ejecuta la importación.
+
+Los datos de demostración se insertan desde server.js cuando la tabla users está vacía.
